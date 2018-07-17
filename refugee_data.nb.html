@@ -190,32 +190,47 @@ $(document).ready(function () {
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<blockquote>
+<p>On a first look at the dataset, the first two rows of the dataset do not contain data. The third row contains the actual headings. Let’s strip the first two rows from the dataset and set the first row as the column headings</p>
+</blockquote>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVmdWdlZXMgPC0gcmVhZF9jc3YoXCIuL2RhdGEvcmVmdWdlZV9kYXRhLmNzdlwiLCBjb2xfbmFtZXMgPSBUUlVFKVxuYGBgIn0= -->
-<pre class="r"><code>refugees &lt;- read_csv(&quot;./data/refugee_data.csv&quot;, col_names = TRUE)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVmdWdlZXMgPC0gcmVhZF9jc3YoXCIuL2RhdGEvcmVmdWdlZV9kYXRhLmNzdlwiLCBjb2xfbmFtZXMgPSBUUlVFLCBza2lwID0gMylcbmBgYCJ9 -->
+<pre class="r"><code>refugees &lt;- read_csv(&quot;./data/refugee_data.csv&quot;, col_names = TRUE, skip = 3)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiTWlzc2luZyBjb2x1bW4gbmFtZXMgZmlsbGVkIGluOiAnWDMnIFszXSwgJ1g0JyBbNF0sICdYNScgWzVdLCAnWDYnIFs2XSwgJ1g3JyBbN10sICdYOCcgWzhdLCAnWDknIFs5XSwgJ1gxMCcgWzEwXSwgJ1gxMScgWzExXVBhcnNlZCB3aXRoIGNvbHVtbiBzcGVjaWZpY2F0aW9uOlxuY29scyhcbiAgYEV4dHJhY3RlZCBmcm9tIHRoZSBVTkhDUiBQb3B1bGF0aW9uIFN0YXRpc3RpY3MgUmVmZXJlbmNlIERhdGFiYXNlYCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgYFVuaXRlZCBOYXRpb25zIEhpZ2ggQ29tbWlzc2lvbmVyIGZvciBSZWZ1Z2Vlc2AgPSBjb2xfY2hhcmFjdGVyKCksXG4gIFgzID0gY29sX2NoYXJhY3RlcigpLFxuICBYNCA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgWDUgPSBjb2xfY2hhcmFjdGVyKCksXG4gIFg2ID0gY29sX2NoYXJhY3RlcigpLFxuICBYNyA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgWDggPSBjb2xfY2hhcmFjdGVyKCksXG4gIFg5ID0gY29sX2NoYXJhY3RlcigpLFxuICBYMTAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIFgxMSA9IGNvbF9jaGFyYWN0ZXIoKVxuKVxuIn0= -->
-<pre><code>Missing column names filled in: 'X3' [3], 'X4' [4], 'X5' [5], 'X6' [6], 'X7' [7], 'X8' [8], 'X9' [9], 'X10' [10], 'X11' [11]Parsed with column specification:
+<!-- rnb-output-begin eyJkYXRhIjoiUGFyc2VkIHdpdGggY29sdW1uIHNwZWNpZmljYXRpb246XG5jb2xzKFxuICBZZWFyID0gY29sX2ludGVnZXIoKSxcbiAgYENvdW50cnkgLyB0ZXJyaXRvcnkgb2YgYXN5bHVtL3Jlc2lkZW5jZWAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIE9yaWdpbiA9IGNvbF9jaGFyYWN0ZXIoKSxcbiAgYFJlZnVnZWVzIChpbmNsLiByZWZ1Z2VlLWxpa2Ugc2l0dWF0aW9ucylgID0gY29sX2ludGVnZXIoKSxcbiAgYEFzeWx1bS1zZWVrZXJzIChwZW5kaW5nIGNhc2VzKWAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIGBSZXR1cm5lZCByZWZ1Z2Vlc2AgPSBjb2xfaW50ZWdlcigpLFxuICBgSW50ZXJuYWxseSBkaXNwbGFjZWQgcGVyc29ucyAoSURQcylgID0gY29sX2NoYXJhY3RlcigpLFxuICBgUmV0dXJuZWQgSURQc2AgPSBjb2xfY2hhcmFjdGVyKCksXG4gIGBTdGF0ZWxlc3MgcGVyc29uc2AgPSBjb2xfY2hhcmFjdGVyKCksXG4gIGBPdGhlcnMgb2YgY29uY2VybmAgPSBjb2xfY2hhcmFjdGVyKCksXG4gIGBUb3RhbCBQb3B1bGF0aW9uYCA9IGNvbF9pbnRlZ2VyKClcbilcbm51bWJlciBvZiBjb2x1bW5zIG9mIHJlc3VsdCBpcyBub3QgYSBtdWx0aXBsZSBvZiB2ZWN0b3IgbGVuZ3RoIChhcmcgMSk0NjEyIHBhcnNpbmcgZmFpbHVyZXMuXG5yb3cgXHUwMDFiWzM4OzU7MjQ2bSMgQSB0aWJibGU6IDUgeCA1XHUwMDFiWzM5bSBjb2wgICAgICByb3cgY29sICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBleHBlY3RlZCAgIGFjdHVhbCBmaWxlICAgICAgICAgICAgICAgICAgICAgIGV4cGVjdGVkICAgIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08aW50Plx1MDAxYlszOW1cdTAwMWJbMjNtIFx1MDAxYlszbVx1MDAxYlszODs1OzI0Nm08Y2hyPlx1MDAxYlszOW1cdTAwMWJbMjNtICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gICAgICBcdTAwMWJbM21cdTAwMWJbMzg7NTsyNDZtPGNocj5cdTAwMWJbMzltXHUwMDFiWzIzbSAgXHUwMDFiWzNtXHUwMDFiWzM4OzU7MjQ2bTxjaHI+XHUwMDFiWzM5bVx1MDAxYlsyM20gICAgICAgICAgICAgICAgICAgICBhY3R1YWwgXHUwMDFiWzM4OzU7MjUwbTFcdTAwMWJbMzltIFx1MDAxYls0bTFcdTAwMWJbMjRtXHUwMDFiWzRtMVx1MDAxYlsyNG1cdTAwMWJbNG03XHUwMDFiWzI0bTMyMiBUb3RhbCBQb3B1bGF0aW9uICAgICAgICAgICAgICAgICAgICAgICAgIGFuIGludGVnZXIgKiAgICAgICcuL2RhdGEvcmVmdWdlZV9kYXRhLmNzdicgZmlsZSBcdTAwMWJbMzg7NTsyNTBtMlx1MDAxYlszOW0gXHUwMDFiWzRtMVx1MDAxYlsyNG1cdTAwMWJbNG0xXHUwMDFiWzI0bVx1MDAxYls0bTdcdTAwMWJbMjRtMzIzIFJlZnVnZWVzIChpbmNsLiByZWZ1Z2VlLWxpa2Ugc2l0dWF0aW9ucykgYW4gaW50ZWdlciAqICAgICAgJy4vZGF0YS9yZWZ1Z2VlX2RhdGEuY3N2JyByb3cgXHUwMDFiWzM4OzU7MjUwbTNcdTAwMWJbMzltIFx1MDAxYls0bTFcdTAwMWJbMjRtXHUwMDFiWzRtMVx1MDAxYlsyNG1cdTAwMWJbNG03XHUwMDFiWzI0bTMyMyBUb3RhbCBQb3B1bGF0aW9uICAgICAgICAgICAgICAgICAgICAgICAgIGFuIGludGVnZXIgKiAgICAgICcuL2RhdGEvcmVmdWdlZV9kYXRhLmNzdicgY29sIFx1MDAxYlszODs1OzI1MG00XHUwMDFiWzM5bSBcdTAwMWJbNG0xXHUwMDFiWzI0bVx1MDAxYls0bTFcdTAwMWJbMjRtXHUwMDFiWzRtN1x1MDAxYlsyNG0zMjcgUmVmdWdlZXMgKGluY2wuIHJlZnVnZWUtbGlrZSBzaXR1YXRpb25zKSBhbiBpbnRlZ2VyICogICAgICAnLi9kYXRhL3JlZnVnZWVfZGF0YS5jc3YnIGV4cGVjdGVkIFx1MDAxYlszODs1OzI1MG01XHUwMDFiWzM5bSBcdTAwMWJbNG0xXHUwMDFiWzI0bVx1MDAxYls0bTFcdTAwMWJbMjRtXHUwMDFiWzRtN1x1MDAxYlsyNG0zMjcgVG90YWwgUG9wdWxhdGlvbiAgICAgICAgICAgICAgICAgICAgICAgICBhbiBpbnRlZ2VyICogICAgICAnLi9kYXRhL3JlZnVnZWVfZGF0YS5jc3YnXG4uLi4gLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uIC4uLiAuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gLi4uLi4uLi4gLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gLi4uLi4uIC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4gLi4uLiAuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uIC4uLiAuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uIC4uLiAuLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uIC4uLi4uLi4uIC4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi5cblNlZSBwcm9ibGVtcyguLi4pIGZvciBtb3JlIGRldGFpbHMuXG4ifQ== -->
+<pre><code>Parsed with column specification:
 cols(
-  `Extracted from the UNHCR Population Statistics Reference Database` = col_character(),
-  `United Nations High Commissioner for Refugees` = col_character(),
-  X3 = col_character(),
-  X4 = col_character(),
-  X5 = col_character(),
-  X6 = col_character(),
-  X7 = col_character(),
-  X8 = col_character(),
-  X9 = col_character(),
-  X10 = col_character(),
-  X11 = col_character()
-)</code></pre>
+  Year = col_integer(),
+  `Country / territory of asylum/residence` = col_character(),
+  Origin = col_character(),
+  `Refugees (incl. refugee-like situations)` = col_integer(),
+  `Asylum-seekers (pending cases)` = col_character(),
+  `Returned refugees` = col_integer(),
+  `Internally displaced persons (IDPs)` = col_character(),
+  `Returned IDPs` = col_character(),
+  `Stateless persons` = col_character(),
+  `Others of concern` = col_character(),
+  `Total Population` = col_integer()
+)
+number of columns of result is not a multiple of vector length (arg 1)4612 parsing failures.
+row [38;5;246m# A tibble: 5 x 5[39m col      row col                                      expected   actual file                      expected    [3m[38;5;246m&lt;int&gt;[39m[23m [3m[38;5;246m&lt;chr&gt;[39m[23m                                    [3m[38;5;246m&lt;chr&gt;[39m[23m      [3m[38;5;246m&lt;chr&gt;[39m[23m  [3m[38;5;246m&lt;chr&gt;[39m[23m                     actual [38;5;250m1[39m [4m1[24m[4m1[24m[4m7[24m322 Total Population                         an integer *      './data/refugee_data.csv' file [38;5;250m2[39m [4m1[24m[4m1[24m[4m7[24m323 Refugees (incl. refugee-like situations) an integer *      './data/refugee_data.csv' row [38;5;250m3[39m [4m1[24m[4m1[24m[4m7[24m323 Total Population                         an integer *      './data/refugee_data.csv' col [38;5;250m4[39m [4m1[24m[4m1[24m[4m7[24m327 Refugees (incl. refugee-like situations) an integer *      './data/refugee_data.csv' expected [38;5;250m5[39m [4m1[24m[4m1[24m[4m7[24m327 Total Population                         an integer *      './data/refugee_data.csv'
+... ................................. ... ............................................................................................. ........ .......................................................................................................................................................................................................................... ...... ........................................................................................................................................ .... ........................................................................................................................................ ... ........................................................................................................................................ ... ........................................................................................................................................ ........ ........................................................................................................................................
+See problems(...) for more details.</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBSZW1vdmUgc3BhY2VzIGZyb20gaGVhZGluZ3MgYW5kIHJlcGxhY2Ugd2l0aCB1bmRlcnNjb3JlcywgbWFrZSBhbGwgY29sdW1uIGhlYWRpbmdzIGxvd2VyY2FzZVxuY29sbmFtZXMocmVmdWdlZXMpIDwtIHRvbG93ZXIoZ3N1YihcIlxcXFwufFxcXFwtfFxcXFwofFxcXFwpfFxcXFxzfC9cIiwgXCJcIixjb2xuYW1lcyhyZWZ1Z2VlcykpKVxuYGBgIn0= -->
+<pre class="r"><code># Remove spaces from headings and replace with underscores, make all column headings lowercase
+colnames(refugees) &lt;- tolower(gsub(&quot;\\.|\\-|\\(|\\)|\\s|/&quot;, &quot;&quot;,colnames(refugees)))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlJlZnVnZWUgRGF0YSINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCg0KDQpgYGB7ciBJbXBvcnQgTGlicmFyaWVzfQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpgYGANCg0KYGBge3IgSW1wb3J0IENTVn0NCnJlZnVnZWVzIDwtIHJlYWRfY3N2KCIuL2RhdGEvcmVmdWdlZV9kYXRhLmNzdiIsIGNvbF9uYW1lcyA9IFRSVUUpDQpgYGANCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlJlZnVnZWUgRGF0YSINCm91dHB1dDogaHRtbF9ub3RlYm9vaw0KLS0tDQoNCg0KDQpgYGB7ciBJbXBvcnQgTGlicmFyaWVzfQ0KbGlicmFyeSh0aWR5dmVyc2UpDQpgYGANCg0KPiBPbiBhIGZpcnN0IGxvb2sgYXQgdGhlIGRhdGFzZXQsIHRoZSBmaXJzdCB0d28gcm93cyBvZiB0aGUgZGF0YXNldCBkbyBub3QgY29udGFpbiBkYXRhLiBUaGUgdGhpcmQgcm93IGNvbnRhaW5zIHRoZSBhY3R1YWwgaGVhZGluZ3MuIExldCdzIHN0cmlwIHRoZSBmaXJzdCB0d28gcm93cyBmcm9tIHRoZSBkYXRhc2V0IGFuZCBzZXQgdGhlIGZpcnN0IHJvdyBhcyB0aGUgY29sdW1uIGhlYWRpbmdzDQoNCmBgYHtyIEltcG9ydCBDU1Z9DQpyZWZ1Z2VlcyA8LSByZWFkX2NzdigiLi9kYXRhL3JlZnVnZWVfZGF0YS5jc3YiLCBjb2xfbmFtZXMgPSBUUlVFLCBza2lwID0gMykNCmBgYA0KDQpgYGB7ciBEYXRhIHdyYW5nbGluZ30NCiMgUmVtb3ZlIHNwZWNpYWwgY2hhcmFjdGVycyBmcm9tIGhlYWRpbmdzLCBtYWtlIGFsbCBjb2x1bW4gaGVhZGluZ3MgbG93ZXJjYXNlDQpjb2xuYW1lcyhyZWZ1Z2VlcykgPC0gdG9sb3dlcihnc3ViKCJcXC58XFwtfFxcKHxcXCl8XFxzfC8iLCAiIixjb2xuYW1lcyhyZWZ1Z2VlcykpKQ0KDQpgYGANCg0K</div>
 
 
 

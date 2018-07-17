@@ -9,7 +9,15 @@ output: html_notebook
 library(tidyverse)
 ```
 
+> On a first look at the dataset, the first two rows of the dataset do not contain data. The third row contains the actual headings. Let's strip the first two rows from the dataset and set the first row as the column headings
+
 ```{r Import CSV}
-refugees <- read_csv("./data/refugee_data.csv", col_names = TRUE)
+refugees <- read_csv("./data/refugee_data.csv", col_names = TRUE, skip = 3)
+```
+
+```{r Data wrangling}
+# Remove special characters from headings, make all column headings lowercase
+colnames(refugees) <- tolower(gsub("\\.|\\-|\\(|\\)|\\s|/", "",colnames(refugees)))
+
 ```
 
