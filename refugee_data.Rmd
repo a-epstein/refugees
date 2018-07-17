@@ -1,0 +1,15 @@
+---
+title: "Refugee Data"
+output: html_notebook
+---
+
+
+
+```{r Import Libraries}
+library(tidyverse)
+```
+
+```{r Import CSV}
+refugees <- read_csv("./data/refugee_data.csv", col_names = TRUE)
+```
+
