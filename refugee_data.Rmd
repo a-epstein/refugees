@@ -10,50 +10,39 @@ output: html_notebook
 3a. How much of an effect did the conflict in Syria and Afghanistan have on global refugee numbers?
 3b. Are the countries that have been historically supportive of rehoming refugees been as supportive during this conflict?
 
-```{r Import Libraries}
+# Import Libraries
+```{r Import Libraries, results='hide'}
 library(tidyverse)
 library(scales)   # needed for formatting y-axis labels to non-scientific type
 ```
 
+# Import Dataset
+
 > On a first look at the dataset, the first two rows of the dataset do not contain data. The third row contains the actual headings. Let's strip the first two rows from the dataset and set the first row as the column headings
 
-```{r Import CSV}
+```{r Import CSV, results='hide'}
 refugees <- read_csv("./data/refugee_data.csv", col_names = TRUE, skip = 3)
 ```
+
+# Data Wrangling
 
 > Changing column headings to remove special characters and make it lowercase
 > Also change some column names
 
-```{r Data wrangling}
+```{r Data wrangling, results='hide'}
 # Remove special characters from headings, make all column headings lowercase
 colnames(refugees) <- tolower(gsub("\\.|\\-|\\(|\\)|\\s|/", "",colnames(refugees)))
 
 # Rename Country column and refugees
 refugees <- refugees %>%
     rename(countryofresidence = countryterritoryofasylumresidence)
-
-```
-
-# Total refugees over time, by country
-> Selecting every country results in R freaking out trying to plot the whole thing so let's try just two countries
-
-```{r}
-
-totalref <- refugees %>%
-    select(countryofresidence, year, totalpopulation) %>%
-    filter(countryofresidence == "United States of America" | countryofresidence == "France")
-    
-total_ref_over_time_plot <- ggplot(totalref, aes(x=year, y=totalpopulation, color =countryofresidence)) +
-    geom_line()
-
-print(total_ref_over_time_plot)
 ```
 
 ##1. From which countries have the most refugees originated?
 
 > By far the most refugees have originated from Afghanistan.
 
-```{r}
+```{r Countries of greatest refugee origin}
 
 # Select all rows that contain the total population of refugees from a country for each year
 # Roll up dataset to overall refugees per country
@@ -99,3 +88,18 @@ print(refugees_per_country_plot)
 
 ```
 
+
+# Total refugees over time, by country
+> Selecting every country results in R freaking out trying to plot the whole thing so let's try just two countries
+
+```{r Test}
+
+totalref <- refugees %>%
+    select(countryofresidence, year, totalpopulation) %>%
+    filter(countryofresidence == "United States of America" | countryofresidence == "France")
+    
+total_ref_over_time_plot <- ggplot(totalref, aes(x=year, y=totalpopulation, color =countryofresidence)) +
+    geom_line()
+
+print(total_ref_over_time_plot)
+```
