@@ -3,10 +3,16 @@ title: "Refugee Data"
 output: html_notebook
 ---
 
+## Questions
 
+1. From which countries have the most refugees originated?
+2. Which countries have been most supportive in rehoming refugees?
+3a. How much of an effect did the conflict in Syria and Afghanistan have on global refugee numbers?
+3b. Are the countries that have been historically supportive of rehoming refugees been as supportive during this conflict?
 
 ```{r Import Libraries}
 library(tidyverse)
+library(scales)   # needed for formatting y-axis labels to non-scientific type
 ```
 
 > On a first look at the dataset, the first two rows of the dataset do not contain data. The third row contains the actual headings. Let's strip the first two rows from the dataset and set the first row as the column headings
@@ -15,9 +21,81 @@ library(tidyverse)
 refugees <- read_csv("./data/refugee_data.csv", col_names = TRUE, skip = 3)
 ```
 
+> Changing column headings to remove special characters and make it lowercase
+> Also change some column names
+
 ```{r Data wrangling}
 # Remove special characters from headings, make all column headings lowercase
 colnames(refugees) <- tolower(gsub("\\.|\\-|\\(|\\)|\\s|/", "",colnames(refugees)))
+
+# Rename Country column and refugees
+refugees <- refugees %>%
+    rename(countryofresidence = countryterritoryofasylumresidence)
+
+```
+
+# Total refugees over time, by country
+> Selecting every country results in R freaking out trying to plot the whole thing so let's try just two countries
+
+```{r}
+
+totalref <- refugees %>%
+    select(countryofresidence, year, totalpopulation) %>%
+    filter(countryofresidence == "United States of America" | countryofresidence == "France")
+    
+total_ref_over_time_plot <- ggplot(totalref, aes(x=year, y=totalpopulation, color =countryofresidence)) +
+    geom_line()
+
+print(total_ref_over_time_plot)
+```
+
+##1. From which countries have the most refugees originated?
+
+> By far the most refugees have originated from Afghanistan.
+
+```{r}
+
+# Select all rows that contain the total population of refugees from a country for each year
+# Roll up dataset to overall refugees per country
+mostref <- refugees %>%
+    select(origin, totalpopulation) %>%
+    group_by(origin) %>%
+    summarize(
+        refugees_per_country = sum(totalpopulation,na.rm=TRUE)
+    ) %>% 
+    # na.rm = TRUE so that SUM will treat NA as 0 and math can be done
+    arrange(desc(refugees_per_country)) %>% # rearrange based on count
+    filter(
+        # Filter to the top 95% of countries
+        refugees_per_country > quantile(refugees_per_country, 0.95),
+        # Filter out all unknown origin from dataset since it's not useful data
+        origin !="Various/Unknown"
+    )
+
+# Change origin into a factor so ggplot will honor the sort order
+mostref$origin <- factor(mostref$origin, levels=mostref$origin)
+
+# A simple bar plot where X is the country of origin and Y is the number of refugees that originated from that country
+refugees_per_country_plot <- ggplot(
+    mostref,
+    aes(x=origin, y=refugees_per_country/1000000,fill=refugees_per_country)
+    ) + 
+    geom_col() + 
+    # Get rid of scientific notation
+    scale_y_continuous(labels = comma) +
+    labs(
+        title="Top 5% Countries From Which Refugees Have Originated", 
+        x="Country", 
+        y="Number of Refugees (in millions)") +
+    theme_minimal() +
+    theme(
+        axis.text.x=element_text(angle=0),
+        axis.text.y=element_text(angle=0),
+        legend.position = "null"
+    ) +
+    coord_flip()
+                                    
+print(refugees_per_country_plot)
 
 ```
 
