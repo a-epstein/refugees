@@ -14,6 +14,7 @@ output: html_notebook
 ```{r Import Libraries, results='hide'}
 library(tidyverse)
 library(scales)   # needed for formatting y-axis labels to non-scientific type
+library(gridExtra)
 ```
 
 # Import Dataset
@@ -35,10 +36,11 @@ colnames(refugees) <- tolower(gsub("\\.|\\-|\\(|\\)|\\s|/", "",colnames(refugees
 
 # Rename Country column and refugees
 refugees <- refugees %>%
-    rename(countryofresidence = countryterritoryofasylumresidence)
+    rename(countryofresidence = countryterritoryofasylumresidence,
+           refugeesinc = refugeesinclrefugeelikesituations)
 ```
 
-##1. From which countries have the most refugees originated?
+## 1. From which countries have the most refugees originated?
 
 > By far the most refugees have originated from Afghanistan.
 
@@ -88,8 +90,79 @@ print(refugees_per_country_plot)
 
 ```
 
+##2. Which countries have been most supportive in rehoming refugees?
 
-# Total refugees over time, by country
+```{r Countries with largest refugee population}
+# Select all rows that contain the total population of refugees for each year
+# Roll up dataset to overall refugees per country
+refugee_support <- refugees %>%
+    select(countryofresidence, totalpopulation) %>%
+    group_by(countryofresidence) %>%
+    summarize(
+        refugees_per_country = sum(totalpopulation,na.rm=TRUE)
+    ) %>% 
+    # na.rm = TRUE so that SUM will treat NA as 0 and math can be done
+    arrange(desc(refugees_per_country)) %>% # rearrange based on count
+    filter(
+        # Filter to the top 95% largest refugee populations of countries 
+        refugees_per_country > quantile(refugees_per_country, 0.95)
+    )
+
+# Change origin into a factor so ggplot will honor the sort order
+refugee_support$countryofresidence <- factor(refugee_support$countryofresidence, levels=refugee_support$countryofresidence)
+
+# A simple bar plot where X is the country of origin and Y is the number of refugees that originated from that country
+refugee_residence_plot <- ggplot(
+    refugee_support,
+    aes(x=countryofresidence, y=refugees_per_country/1000000,fill=refugees_per_country)
+    ) + 
+    geom_col() + 
+    # Get rid of scientific notation
+    scale_y_continuous(labels = comma) +
+    labs(
+        title="Top 5% Largest Refugee Populations", 
+        x="Country", 
+        y="Number of Refugees (in millions)") +
+    theme_minimal() +
+    theme(
+        axis.text.x=element_text(angle=0),
+        axis.text.y=element_text(angle=0),
+        legend.position = "null"
+    ) +
+    coord_flip()
+                                    
+print(refugee_residence_plot)
+```
+
+```{r}
+grid.arrange(refugees_per_country_plot,refugee_residence_plot)
+```
+
+## 3a. How much of an effect did the conflict in Syria and Afghanistan have on global refugee numbers?
+
+```{r}
+# Let's find all the refugees total for the years of the conflict(s)
+# Syria (2011-present)
+# Break down by refugees originating in Syria and Afghanistan, compared to the rest of the world
+
+syrianconflict <- refugees %>%
+    select(year,origin,totalpopulation) %>%
+    mutate() %>% #non-syrian refugees
+    group_by(origin, year) %>%
+    summarize(
+    refugees_per_country = sum(totalpopulation,na.rm=TRUE)
+    ) %>%
+    filter(year > 2010) %>%
+    arrange(year)
+
+# Afghanistan (1989-present)
+```
+
+## 3b. Are the countries that have been historically supportive of rehoming refugees been as supportive during this conflict?
+
+
+
+# Test plot: Total refugees over time, by country
 > Selecting every country results in R freaking out trying to plot the whole thing so let's try just two countries
 
 ```{r Test}
