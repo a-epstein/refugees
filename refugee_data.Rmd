@@ -7,8 +7,8 @@ output: html_notebook
 
 1. From which countries have the most refugees originated?
 2. Which countries have been most supportive in rehoming refugees?
-3a. How much of an effect did the conflict in Syria and Afghanistan have on global refugee numbers?
-3b. Are the countries that have been historically supportive of rehoming refugees been as supportive during this conflict?
+3. How much of an effect did the conflict in Syria and Afghanistan have on global refugee numbers?
+4. Are the countries that have been historically supportive of rehoming refugees been as supportive during this conflict?
 
 # Import Libraries
 ```{r Import Libraries, results='hide'}
